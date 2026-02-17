@@ -4,7 +4,7 @@ data "aws_availability_zones" "available" {
 
 locals {
   azs                = slice(data.aws_availability_zones.available.names, 0, 2)
-  assets_bucket_name = "${var.assets_bucket_prefix}-${var.student_id}"
+  assets_bucket_name = "bedrock-assets-bobo123"
 }
 
 # -------------------------
