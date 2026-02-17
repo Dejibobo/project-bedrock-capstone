@@ -1,4 +1,46 @@
-# Keep as minimal overrides first.
-# Add changes only if needed for your environment.
+# retail-app-values.yaml
 
-namespaceOverride: retail-app
+# MySQL dependency
+mysql:
+  enabled: true
+  replicaCount: 1
+  image: mysql:8.0
+  servicePort: 3306
+  rootPassword: password
+
+# PostgreSQL dependency
+postgres:
+  enabled: false
+  replicaCount: 1
+  image: postgres:15
+  servicePort: 5432
+  postgresPassword: password
+
+# Redis dependency
+redis:
+  enabled: false
+  replicaCount: 1
+  image: redis:7
+  servicePort: 6379
+
+# RabbitMQ dependency
+rabbitmq:
+  enabled: false
+  replicaCount: 1
+  image: rabbitmq:3-management
+  servicePort: 5672
+
+# DynamoDB Local dependency
+dynamodb:
+  enabled: false
+  replicaCount: 1
+  image: amazon/dynamodb-local
+  servicePort: 8000
+
+# Retail store sample app
+app:
+  enabled: true
+  replicaCount: 1
+  image: public.ecr.aws/aws-containers/retail-store-sample-app:latest
+  servicePort: 8080
+

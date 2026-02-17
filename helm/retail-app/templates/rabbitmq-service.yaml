@@ -1,0 +1,15 @@
+{{- if .Values.rabbitmq.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+  namespace: retail-app
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.rabbitmq.servicePort }}
+      targetPort: {{ .Values.rabbitmq.containerPort }}
+  selector:
+    app: rabbitmq
+{{- end }}
+

@@ -1,0 +1,24 @@
+{{- if .Values.dynamodb.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dynamodb
+  namespace: retail-app
+spec:
+  replicas: {{ .Values.dynamodb.replicaCount }}
+  selector:
+    matchLabels:
+      app: dynamodb
+  template:
+    metadata:
+      labels:
+        app: dynamodb
+    spec:
+      containers:
+      - name: dynamodb
+        image: "{{ .Values.dynamodb.image.repository }}:{{ .Values.dynamodb.image.tag }}"
+        imagePullPolicy: "{{ .Values.dynamodb.image.pullPolicy }}"
+        ports:
+        - containerPort: {{ .Values.dynamodb.containerPort }}
+{{- end }}
+

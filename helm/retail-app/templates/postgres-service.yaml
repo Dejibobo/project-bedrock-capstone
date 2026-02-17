@@ -1,0 +1,15 @@
+{{- if .Values.postgres.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: retail-app
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.postgres.servicePort }}
+      targetPort: {{ .Values.postgres.containerPort }}
+  selector:
+    app: postgres
+{{- end }}
+

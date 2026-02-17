@@ -1,0 +1,18 @@
+{{- if .Values.app.enabled | default true }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: retail-app
+  namespace: retail-app
+spec:
+  type: {{ .Values.app.service.type | default "ClusterIP" }}
+  ports:
+    - port: {{ .Values.app.servicePort }}
+      targetPort: {{ .Values.app.containerPort }}
+      {{- if .Values.app.service.nodePort }}
+      nodePort: {{ .Values.app.service.nodePort }}
+      {{- end }}
+  selector:
+    app: retail-app
+{{- end }}
+

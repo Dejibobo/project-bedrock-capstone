@@ -1,0 +1,24 @@
+{{- if .Values.app.enabled | default true }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: retail-app
+  namespace: retail-app
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: retail-app
+  template:
+    metadata:
+      labels:
+        app: retail-app
+    spec:
+      containers:
+      - name: retail-app
+        image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
+        imagePullPolicy: "{{ .Values.app.image.pullPolicy }}"
+        ports:
+        - containerPort: {{ .Values.app.containerPort }}
+{{- end }}
+

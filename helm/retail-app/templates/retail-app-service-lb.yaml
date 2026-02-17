@@ -1,0 +1,21 @@
+{{- if .Values.app.loadBalancer.enabled | default true }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "retail-app.fullname" . }}-lb
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "retail-app.name" . }}
+    helm.sh/chart: {{ include "retail-app.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: LoadBalancer
+  selector:
+    app: {{ include "retail-app.name" . }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.app.loadBalancer.port | default 80 }}
+      targetPort: {{ .Values.app.containerPort | default 8080 }}
+{{- end }}
+

@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    bucket         = "bedrock-tfstate-chukwuka-1021"
+    bucket         = "bedrock-tfstate-268811324973"
     key            = "project-bedrock/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "bedrock-tf-locks"
+    dynamodb_table = "terraform-locks"
   }
 }

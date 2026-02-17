@@ -1,0 +1,97 @@
+# Retail app (nginx placeholder)
+# Main application
+app:
+  enabled: true
+  replicaCount: 1
+  servicePort: 80
+  containerPort: 8080
+  image:
+    repository: public.ecr.aws/aws-containers/retail-store-sample-ui
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: LoadBalancer
+    nodePort: null
+  loadBalancer:
+    enabled: true       # <-- add this
+
+# MySQL
+mysql:
+  enabled: true
+  replicaCount: 1
+  rootPassword: password
+  servicePort: 3306
+  containerPort: 3306
+  image:
+    repository: mysql
+    tag: "8.0"
+    pullPolicy: IfNotPresent
+
+# PostgreSQL
+postgres:
+  enabled: true
+  replicaCount: 1
+  postgresPassword: password
+  servicePort: 5432
+  containerPort: 5432
+  image:
+    repository: postgres
+    tag: "15"
+    pullPolicy: IfNotPresent
+
+# DynamoDB Local
+dynamodb:
+  enabled: true
+  replicaCount: 1
+  servicePort: 8000
+  containerPort: 8000
+  image:
+    repository: amazon/dynamodb-local
+    tag: latest
+    pullPolicy: IfNotPresent
+
+# RabbitMQ
+rabbitmq:
+  enabled: true
+  replicaCount: 1
+  servicePort: 5672
+  containerPort: 5672
+  image:
+    repository: rabbitmq
+    tag: 3-management
+    pullPolicy: IfNotPresent
+
+# Redis
+redis:
+  enabled: true
+  replicaCount: 1
+  servicePort: 6379
+  containerPort: 6379
+  image:
+    repository: redis
+    tag: 7.0
+    pullPolicy: IfNotPresent
+
+# Optional Kubernetes settings
+volumes: []
+volumeMounts: []
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# NOTES / Service references
+service:
+  port: 8080
+  type: ClusterIP
+
+httpRoute:
+  enabled: false
+  hostnames: []
+  parentRefs: []
+  rules: []
+
+ingress:
+  enabled: false
+  hosts: []
+  tls: []
+

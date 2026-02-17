@@ -1,0 +1,15 @@
+{{- if .Values.dynamodb.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: dynamodb
+  namespace: retail-app
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.dynamodb.servicePort }}
+      targetPort: {{ .Values.dynamodb.containerPort }}
+  selector:
+    app: dynamodb
+{{- end }}
+
